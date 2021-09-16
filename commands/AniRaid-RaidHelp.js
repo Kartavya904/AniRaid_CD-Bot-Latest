@@ -6101,9 +6101,68 @@ module.exports = {
             },
         ]
 
+        
 
         var found = 0
         var send = 0
+        if (arguments.includes('suggestion')) {
+            found = 1 
+            let filter = (m) => m.author.id === message.author.id
+		    message.channel.send('Please Name The Card You Want To Suggest The Teams For? ')
+		    message.channel
+			    .awaitMessages({
+				    filter : filter,
+				    max: 1,
+				    time: 20000,
+				    errors: ['time'],
+			    })
+			    .then((msg) => {
+				    message1 = msg.first().content.toLowerCase()
+                    console.log(message1)
+                    let c = 0
+                    for (let eachCard of cardList) {
+                        let expectedCardName = eachCard[0].toLowerCase()                        
+                        if (expectedCardName === message1) {
+                            c = 1
+                            message.channel.send(`Please Input Your Custom Team For ${eachCard[0]} Raids?`)
+                            message.channel
+                            .awaitMessages({
+                                filter : filter,
+                                max : 1,
+                                time : 20000,
+                                errors : ['time'],
+                            })
+                            .then((msg1) => {
+                                newCardComp = msg1.first().content
+                                message.channel.send(`Thanks For Your Feedback, Your Team Composition For ${eachCard[0]} Raids Is Noted.`)
+                                client.users.cache.get('439541365580365835').send(`${message.author.username} Suggested Team Compositions For ${eachCard[0]}'s Raids.\n${newCardComp}`)
+                            })
+                        }
+                        if (c === 0) {
+                            if (expectedCardName.includes(message1)) {
+                                c = 1
+                                message.channel.send(`Please Input Your Custom Team For ${eachCard[0]} Raids?`)
+                                message.channel
+                                .awaitMessages({
+                                    filter : filter,
+                                    max : 1,
+                                    time : 20000,
+                                    errors : ['time'],
+                                })
+                                .then((msg1) => {
+                                    newCardComp = msg1.first().content
+                                    message.channel.send(newCardComp)
+                                })
+                            }   
+                        }
+                        
+                    }
+                    if (c === 0) {
+                        message.channel.send('Please Try Again With The Correct Card Name!')
+                    }
+            })
+        }
+        if (found === 0 && send === 0) {
         let givenCardName = arguments.join(' ')
         givenCardName = givenCardName.replace("(", "")
         givenCardName = givenCardName.replace(")", "")
@@ -6361,6 +6420,7 @@ module.exports = {
                 })
             }
             interact(msg)
+            }
 
 
             // var msg = await message.channel.send({ embeds : [raidEmbed1] })

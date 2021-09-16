@@ -91,6 +91,7 @@ module.exports = (client, commandOptions) => {
 
                 let arguments = content.split(/[ ]+/)
                 console.log(`Registering The Command "${arguments[0]}"`)
+                console.log(content.split(' '))
                 arguments.shift()
                 if (arguments.length < minArgs || (maxArgs!== null && arguments.length > maxArgs)) {
                     message.reply(`Unexpected Syntax \nPlease Use ${prefix}${alias} ${expectedArgs} `)
