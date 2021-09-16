@@ -177,9 +177,9 @@ client.on('ready', async () => {
                             if (card.includes(`[impossible]`)) {
                                 if (card.includes('rare') || card.includes('super') || card.includes('ultra')) {
                                     if (card.includes('[0/6]') || card.includes('[1/6]') || card.includes('[2/6]') || card.includes('[3/6]') || card.includes('[4/6]') || card.includes('[5/6]')) {
-                                        client.channels.cache.get('755431495778435082').send(`<@618164180129808406> & <@463960332931694603>`)
-                                        client.channels.cache.get('755431495778435082').send(card)
-                                        client.channels.cache.get('755431495778435082').send(`.rd join ${RaidId}\n ‍ `)
+                                        // client.channels.cache.get('755431495778435082').send(`<@618164180129808406> & <@463960332931694603>`)
+                                        // client.channels.cache.get('755431495778435082').send(card)
+                                        // client.channels.cache.get('755431495778435082').send(`.rd join ${RaidId}\n ‍ `)
                                     }
                                 }
                             }
